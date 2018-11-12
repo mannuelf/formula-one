@@ -12,33 +12,42 @@
         <app-loading-spinner />
       </div>
       <div v-else>
-        {{ results }}
         <table class="table">
           <tbody>
-          <tr><th colspan="0">Driver Standings</th></tr>
-          <tr>
-            <th>Pos</th>
-            <th>Driver</th>
-            <th>Constructor</th>
-            <th>Points</th>
-            <th>Wins</th>
-          </tr>
-          <tr
-            v-for="results of results.StandingsTable"
-            v-bind:key="results.id">
-            <td>{{ Driver.position }}</td>
-            <td>{{ givenName }} {{ familyName }}</td>
-            <td>Alfa Romeo</td>
-            <td>{{ points }}</td>
-            <td>{{ wins }}</td>
-          </tr>
-        </tbody></table>
+            <tr><th colspan="0">Driver Standings</th></tr>
+            <tr>
+              <th>Year</th>
+              <th>Pos</th>
+              <th>Driver</th>
+              <th>Constructor</th>
+              <th>Points</th>
+              <th>Wins</th>
+            </tr>
+            <tr
+              v-for="result of results"
+              v-bind:key="result.id">
+              <td> {{ result.season }} </td>
+              <td>
+                {{ result.DriverStandings[0].position }}
+              </td>
+              <td>
+                {{ result.DriverStandings[0].Driver.givenName }}
+                {{ result.DriverStandings[0].Driver.familyName }}
+              </td>
+              <td>{{ result.DriverStandings[0].Constructors[0].name }}</td>
+              <td>{{ result.DriverStandings[0].points }}</td>
+              <td>{{ result.DriverStandings[0].wins }}</td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </section>
   </div>
 </template>
+
 <style>
 </style>
+
 <script>
 import axios from 'axios'
 import LoadingSpinner from '@/components/LoadingSpinner.vue'
@@ -51,7 +60,7 @@ export default {
   data() {
     return {
       page_title: 'Winners',
-      results: null,
+      results: [],
       errors: [],
       errored: false,
       loading: true
@@ -84,7 +93,7 @@ export default {
 
               for (let key in standingsLists) {
                 const seasons = standingsLists[key]
-                console.log('standingsLists', seasons)
+
                 this.results = seasons
               }
             }
