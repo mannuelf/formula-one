@@ -1,0 +1,35 @@
+// Site: Formula One Championship
+
+@import "bulma/sass/utilities/_all.sass"
+
+// Brand specific styles and overrides
+$brandRed: #FF5E5B
+$brandGrey: #FCFCFC
+$brandBlack: #001021
+$brandBlue: #1B98E0
+$white: #FFFFFF
+
+body
+  background-color: $brandGrey
+  background-image: url('~/assets/img/1965_Honda_RA272_formula_one_f_1_race_racing_classic_h.jpg') // https://www.wallpaperup.com/147600/1965_Honda_RA272_formula_one_f-1_race_racing_classic_h.html
+  background-repeat: no-repeat
+  background-position: center bottom
+  background-size: cover
+
+.navbar
+  &.is-primary
+    background-color: transparent
+    color: $brandRed
+
+.navbar
+  &.is-primary
+    .navbar-brand > .navbar-item,
+    .navbar.is-primary .navbar-brand .navbar-link
+      color: $brandBlack
+      background-color: $white
+      font-size: 2em
+      font-weight: 600
+
+.footer
+  background-color: $brandBlack
+  color: $white
