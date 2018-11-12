@@ -10,12 +10,12 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'welcome',
+      name: 'Welcome',
       component: Welcome
     },
     {
       path: '/winners',
-      name: 'winner',
+      name: 'Winners',
       component: Winners
     }
   ]

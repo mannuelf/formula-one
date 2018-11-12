@@ -1,8 +1,5 @@
 <template>
   <div>
-    <hgroup>
-      <h1 class="title is-1 has-text-left">{{ page_title }}</h1>
-    </hgroup>
 
     <section v-if="errored">
       <p>{{ errors }}</p>
@@ -12,12 +9,15 @@
         <app-loading-spinner />
       </div>
       <div v-else>
-        <table class="table">
+        <hgroup>
+          <h1 class="title is-1 has-text-left">{{ page_title }}</h1>
+          <h2 class="subtitle has-text-left">Driver Standings</h2>
+        </hgroup>
+        <table class="table is-narrow is-hoverable is-fullwidth">
           <tbody>
-            <tr><th colspan="0">Driver Standings</th></tr>
             <tr>
               <th>Year</th>
-              <th>Pos</th>
+              <th><abbr title="Position">Pos</abbr></th>
               <th>Driver</th>
               <th>Constructor</th>
               <th>Points</th>
@@ -44,10 +44,6 @@
     </section>
   </div>
 </template>
-
-<style>
-</style>
-
 <script>
 import axios from 'axios'
 import LoadingSpinner from '@/components/LoadingSpinner.vue'
@@ -67,6 +63,7 @@ export default {
     }
   },
   created() {
+    this.filteredDriverStandings()
     this.getDriverStandings()
   },
   methods: {
@@ -107,6 +104,10 @@ export default {
           this.loading = false
         })
     },
+    filteredDriverStandings(results) {
+      console.log('filteredDriverStandings', results)
+
+    },
     getAllResults() {
       const allF1Results = 'http://ergast.com/api/f1/results/1.json?limit=200'
       axios
@@ -146,3 +147,18 @@ export default {
   }
 }
 </script>
+<style lang="sass">
+
+.table
+  width: 100%
+  @media screen and (min-width: 768px)
+    background-color: rgba(255, 255, 255, 0.5)
+
+  .table-header
+    background-color: #001021
+    color: #FFFFFF
+    font-size: 1em
+
+  td
+    border-color: rgba(255, 255, 255, 0.1)
+</style>
