@@ -7,7 +7,7 @@
 
       <div class="navbar-brand">
           <router-link
-          to="welcome"
+          to="/"
           class="navbar-item">
           Formula 1
         </router-link>
@@ -21,7 +21,9 @@
               :to="route.path"
               class="navbar-item"
               exact-active-class="is-active">
-              {{route.name}}
+
+              {{ route.name }}
+
             </router-link>
 
           </div>

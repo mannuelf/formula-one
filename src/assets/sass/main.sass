@@ -1,36 +1,43 @@
 // Site: Formula One Championship
 
-@import "bulma/sass/utilities/_all.sass"
-@import "/animate.css/animate.min.css"
+// Import 3rd party library and fonts
+@import url('https://fonts.googleapis.com/css?family=Montserrat|Open+Sans')
 
-// Brand specific styles and overrides
-$brandRed: #FF5E5B
-$brandGrey: #FCFCFC
-$brandBlack: #001021
-$brandBlue: #1B98E0
-$white: #FFFFFF
+// Import helpers and components
+@import './vars.sass'
+@import './helpers/helpers.sass'
+@import './helpers/modifier-classes.sass'
+@import './helpers/typography.sass'
+@import './components/tables.sass'
 
 body
-  background-color: $brandGrey
-  background-image: url('~/assets/img/1965_Honda_RA272_formula_one_f_1_race_racing_classic_h.jpg') // https://www.wallpaperup.com/147600/1965_Honda_RA272_formula_one_f-1_race_racing_classic_h.html
+  text-align: center
+  font-family: $primary-font
+  color: $brandBlack
+  background-size: cover
   background-repeat: no-repeat
   background-position: center bottom
-  background-size: cover
+  background-image: url('~/assets/img/1965_Honda_RA272_formula_one_f_1_race_racing_classic_h.jpg')
+  background-color: $brandGrey
+  -webkit-font-smoothing: antialiased
+  -moz-osx-font-smoothing: grayscale
 
 .navbar
   &.is-primary
-    background-color: transparent
     color: $brandRed
+    background-color: transparent
 
 .navbar
   &.is-primary
     .navbar-brand > .navbar-item,
     .navbar.is-primary .navbar-brand .navbar-link
+      font-weight: 600
+      font-size: 2em
       color: $brandBlack
       background-color: $white
-      font-size: 2em
-      font-weight: 600
 
 .footer
-  background-color: $brandBlack
   color: $white
+  background-color: $brandBlack
+
+// photo credit: https://www.wallpaperup.com/147600/1965_Honda_RA272_formula_one_f-1_race_racing_classic_h.html

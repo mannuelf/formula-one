@@ -1,4 +1,5 @@
 {
+  // install prettier plugin for your IDE to auto format code style, I choose no semi colons and single quotes
   "semi": false,
   "singleQuote": true
 }

@@ -2,7 +2,7 @@
   <div id="app">
     <app-header-nav />
 
-    <section class="main-content">
+    <section class="main-content push-top-40">
       <article
         :style="{ height: minScreenHeight+'px' }"
         class="container">
@@ -17,17 +17,17 @@
 </template>
 
 <script>
-import HeaderNav from '@/components/HeaderNav'
-import Footer from '@/components/Footer'
 import Bulma from 'bulma'
 import MainCss from '@/assets/sass/main.sass'
-import Welcome from '@/views/Welcome'
+import AnimateCss from "animate.css"
+
+import HeaderNav from '@/components/HeaderNav'
+import Footer from '@/components/Footer'
 
 export default {
   name: 'app',
   components: {
     appHeaderNav: HeaderNav,
-    appWelcome: Welcome,
     appFooter: Footer
   },
   data() {
@@ -37,28 +37,20 @@ export default {
   },
   mounted() {
     this.$nextTick(function() {
-      // show loading bar between page transitions
+      // when mounted and view is rendered call getWindowHeight function
       this.getWindowHeight()
     })
   },
   methods: {
     getWindowHeight: function() {
-      let height = window.height || document.documentElement.clientHeight
-      return height
+      // calculate and assign screen height
+      let screenHeight = window.height || document.documentElement.clientHeight
+      return screenHeight
     }
   }
 }
 </script>
 
 <style lang="sass">
-#app
-  font-family: 'Avenir', Helvetica, Arial, sans-serif
-  -webkit-font-smoothing: antialiased
-  -moz-osx-font-smoothing: grayscale
-  text-align: center
-  color: #2c3e50
 
-.main-content
-  z-index: 2
-  position: relative
 </style>
