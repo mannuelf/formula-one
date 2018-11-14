@@ -73,8 +73,10 @@ export default {
   },
   methods: {
     getSeason() {
+      // listen for event passed on from the Champions component, passes the year
       EventBus.$on('GO_TO_SEASON', season => {
         console.log('AW GO_TO_SEASON', season)
+        // pass year into getAllWinners function API call.
         this.getAllWinners(season)
         this.year = season
         return this.year
@@ -87,7 +89,8 @@ export default {
     },
     getAllWinners(year) {
       console.log('getAllWinners', year)
-      // prop passed to ajax request via template literal, season = 2005 || 2006 || 2007 to 2015
+      year = '2017'
+      // event bus passes the year down and added to api call via template literal, season = 2005 || 2006 || 2007 to 2015
       const allWinners = `http://ergast.com/api/f1/${year}/results/1.json`
       axios
         .get(this.fixCors() + allWinners)
