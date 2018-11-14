@@ -30,8 +30,9 @@
             <tr
               v-for="result of results"
               v-bind:key="result.id"
-              @click.stop.prevent="goToNextPage(result.season)"> <!-- pass in the season for next view to render correct year-->
-              <td :season="result.season">{{ result.season }}</td>
+              @click.stop.prevent="goToSeason(result.season)"
+              v-bind:season="result.season"> <!-- pass in the season for next view to render correct year-->
+              <td>{{ result.season }}</td>
               <td>
                 {{ result.DriverStandings[0].Driver.givenName }}
                 {{ result.DriverStandings[0].Driver.familyName }}
@@ -48,8 +49,9 @@
 </template>
 <script>
 import axios from 'axios'
-import router from '@/router'
 import LoadingSpinner from '@/components/LoadingSpinner.vue'
+import router from '@/router'
+import EventBus from '@/eventBus.js'
 
 export default {
   name: 'Champions',
@@ -65,7 +67,7 @@ export default {
       loading: true,
     }
   },
-  created() {
+  mounted() {
     this.getChampions()
   },
   methods: {
@@ -107,9 +109,10 @@ export default {
           this.loading = false
         })
     },
-    goToNextPage(season) {
+    goToSeason(season) {
       // race season is passed as a parameter on function invocation
-      console.log('season',season)
+      EventBus.$emit('GO_TO_SEASON', season)
+      console.log('C2-GO_TO_SEASON', season)
       return this.$router.push({ name: 'AllWinners', params: { Season: season } })
     }
   }

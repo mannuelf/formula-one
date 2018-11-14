@@ -26,6 +26,7 @@ import Footer from '@/components/Footer'
 
 export default {
   name: 'app',
+  prop: ['season'],
   components: {
     appHeaderNav: HeaderNav,
     appFooter: Footer

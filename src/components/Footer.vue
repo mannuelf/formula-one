@@ -15,7 +15,7 @@ export default {
   name: 'Footer',
   data() {
     return {
-      site_name: pkg.name,
+      site_name: pkg.site_name,
       site_author: pkg.author
     }
   }

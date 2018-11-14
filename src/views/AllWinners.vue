@@ -32,7 +32,7 @@
               v-for="result of results"
               v-bind:key="result.id">
               <td>{{ result.Results[0].position }}</td>
-               <td>
+              <td>
                 {{ result.Results[0].Driver.givenName }}
                 {{ result.Results[0].Driver.familyName }}
               </td>
@@ -49,8 +49,9 @@
 </template>
 <script>
 import axios from 'axios'
-import router from '@/router'
 import LoadingSpinner from '@/components/LoadingSpinner.vue'
+import router from '@/router'
+import EventBus from '@/eventBus.js'
 
 export default {
   name: 'AllWinners',
@@ -63,22 +64,31 @@ export default {
       results: [],
       errors: [],
       errored: false,
-      loading: true
+      loading: true,
+      year: ''
     }
   },
   mounted() {
-    this.getAllWinners()
+    this.getSeason()
   },
   methods: {
+    getSeason() {
+      EventBus.$on('GO_TO_SEASON', season => {
+        console.log('AW GO_TO_SEASON', season)
+        this.getAllWinners(season)
+        this.year = season
+        return this.year
+      })
+    },
     fixCors() {
       // not to be used in production setting.
       const corsAnyWhere = 'https://cors-anywhere.herokuapp.com/'
       return corsAnyWhere
     },
-    getAllWinners() {
-      let season = '2016'
+    getAllWinners(year) {
+      console.log('getAllWinners', year)
       // prop passed to ajax request via template literal, season = 2005 || 2006 || 2007 to 2015
-      const allWinners = `http://ergast.com/api/f1/${season}/results/1.json`
+      const allWinners = `http://ergast.com/api/f1/${year}/results/1.json`
       axios
         .get(this.fixCors() + allWinners)
         .then(response => {
@@ -98,7 +108,6 @@ export default {
               }
             }
           }
-          console.groupEnd()
         })
         .catch(error => {
           let errorsNote = error
@@ -111,3 +120,8 @@ export default {
   }
 }
 </script>
+<style lang="sass">
+.is-multiple-winner
+  background-color: yellow
+</style>
+
