@@ -68,11 +68,8 @@ export default {
       year: ''
     }
   },
-  mounted() {
-    let season = this.year
-    console.log('mounted', season)
+  created() {
     this.getSeason()
-    this.getAllWinners(season)
   },
   methods: {
     getSeason() {
@@ -92,7 +89,7 @@ export default {
     },
     getAllWinners(year) {
       console.log('getAllWinners', year)
-      let getByYear = '2017'
+      let getByYear = year
       // event bus passes the year down and added to api call via template literal, season = 2005 || 2006 || 2007 to 2015
       const allWinners = `http://ergast.com/api/f1/${getByYear}/results/1.json`
       axios
