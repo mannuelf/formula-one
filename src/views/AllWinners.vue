@@ -68,11 +68,9 @@ export default {
       year: ''
     }
   },
-  mounted() {
-    this.$nextTick(function() {
+  created() {
       // when mounted and view is rendered call getWindowHeight function
       this.getSeason()
-    })
   },
   methods: {
     getSeason() {
@@ -82,7 +80,6 @@ export default {
         // pass year into getAllWinners function API call.
         this.getAllWinners(season)
         this.year = season
-        return this.year
       })
     },
     getAllWinners(year) {
@@ -97,7 +94,7 @@ export default {
         }
       })
       axios
-        .get('http://ergast.com/api/f1/2006/results/1.json', config)
+        .get(apiUrl+`${year}/results/1.json`, config)
         .then(response => {
           const MRData = response.data
           const raceTable = []
