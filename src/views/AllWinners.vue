@@ -82,18 +82,19 @@ export default {
         return this.year
       })
     },
-    fixCors() {
-      // not to be used in production setting.
-      const corsAnyWhere = 'https://cors-anywhere.herokuapp.com/'
-      return corsAnyWhere
-    },
     getAllWinners(year) {
-      console.log('getAllWinners', year)
-      let getByYear = year
       // event bus passes the year down and added to api call via template literal, season = 2005 || 2006 || 2007 to 2015
-      const allWinners = `http://ergast.com/api/f1/${getByYear}/results/1.json`
+      const apiUrl = `http://ergast.com/api/f1/`
+      const config = axios.create({
+        method: 'get',
+        baseURL: apiUrl,
+        timeout: 3000,
+        headers: {
+          'Access-Control-Request-Headers': '*'
+        }
+      })
       axios
-        .get(this.fixCors() + allWinners)
+        .get(apiUrl + `2006/results/1.json`, config)
         .then(response => {
           const MRData = response.data
           const raceTable = []

@@ -71,16 +71,18 @@ export default {
     this.getChampions()
   },
   methods: {
-    fixCors() {
-      // not to be used in production setting.
-      const corsAnyWhere = 'https://cors-anywhere.herokuapp.com/'
-      return corsAnyWhere
-    },
     getChampions() {
       // GET request to get championships 2005-2015
-      const champions = 'http://ergast.com/api/f1/driverStandings/1.json?limit=11&offset=55'
-      axios
-        .get(this.fixCors() + champions)
+      const apiUrl = 'http://ergast.com/api/f1'
+      const config = axios.create({
+        method: 'get',
+        baseURL: apiUrl,
+        timeout: 3000,
+        headers: {
+          'Access-Control-Request-Headers': '*'
+        }
+      })
+      axios.get(apiUrl + '/driverStandings/1.json?limit=11&offset=55', config)
         .then(response => {
           const MRData = response.data
           // setup empty arrays for each key that I will later populate in the for loops

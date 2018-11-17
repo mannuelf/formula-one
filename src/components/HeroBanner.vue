@@ -4,7 +4,7 @@
       <div class="hero-body">
         <div class="container">
           <h1 class="title">
-            <slot>{{ site_name }}</slot>
+            <slot>{{ name }}</slot>
           </h1>
           <h2 class="subtitle">
             <slot>{{ message }}</slot>
@@ -19,7 +19,7 @@
 export default {
   name: 'HeroBanner',
   props: {
-    site_name: site_name,
+    site_name: name,
     message: message
   }
 }
