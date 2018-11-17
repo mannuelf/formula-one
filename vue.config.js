@@ -1,4 +1,7 @@
 module.exports = {
+  configureWebpack: {
+    devtool: 'source-map'
+  },
   pwa: {
     name: 'Formula One',
     themeColor: '#1b98e0',

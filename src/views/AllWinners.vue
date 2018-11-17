@@ -68,14 +68,17 @@ export default {
       year: ''
     }
   },
-  created() {
-    this.getSeason()
+  mounted() {
+    this.$nextTick(function() {
+      // when mounted and view is rendered call getWindowHeight function
+      this.getSeason()
+    })
   },
   methods: {
     getSeason() {
       // listen for event passed on from the Champions component, passes the year
       EventBus.$on('GO_TO_SEASON', season => {
-        console.log('AW GO_TO_SEASON', season)
+        console.log('AllWinners SEASON', season)
         // pass year into getAllWinners function API call.
         this.getAllWinners(season)
         this.year = season
@@ -94,7 +97,7 @@ export default {
         }
       })
       axios
-        .get(apiUrl + `2006/results/1.json`, config)
+        .get('http://ergast.com/api/f1/2006/results/1.json', config)
         .then(response => {
           const MRData = response.data
           const raceTable = []
