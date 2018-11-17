@@ -114,8 +114,7 @@ export default {
     goToSeason(season) {
       // race season is passed as a parameter on function invocation
       EventBus.$emit('GO_TO_SEASON', season)
-      console.log('C2-GO_TO_SEASON', season)
-      return this.$router.push({ name: 'AllWinners', params: { Season: season } })
+      return this.$router.push({ name: 'AllWinners', params: { season: season } })
     }
   }
 }

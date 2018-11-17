@@ -7,8 +7,8 @@ window.EventBus = new Vue();
 
 Vue.config.productionTip = false
 
-Vue.component('AllWinners', () => import('@/views/AllWinners'))
-Vue.component('Champions', () => import('@/views/Champions'))
+Vue.component('AllWinners', () => import('@/views/AllWinners.vue'))
+Vue.component('Champions', () => import('@/views/Champions.vue'))
 
 new Vue({
   router,

@@ -17,7 +17,7 @@ export default new Router({
     },
     {
       // I will use props to send the race season(year) to next view
-      path: '/all-winners/:Season',
+      path: '/all-winners/:season',
       name: 'AllWinners',
       component: AllWinners,
       props: true
